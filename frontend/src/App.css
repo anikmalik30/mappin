@@ -1,0 +1,91 @@
+.card {
+  width: 250px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 10px; /* Add padding for better spacing */
+  border: 1px solid tomato; /* Add a border for styling */
+  border-radius: 5px; /* Add rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+label {
+  color: tomato;
+  font-size: 13px;
+  margin: 0; /* Reset margin to remove extra space */
+  padding: 3px 0; /* Add padding for better spacing */
+  border-bottom: 1px solid tomato; /* Add a more visible border-bottom */
+}
+
+.desc {
+  font-size: 14px;
+}
+
+.star {
+  color: gold;
+  font-size: 16px; /* Increase font size for stars */
+}
+
+.username {
+  font-size: 14px;
+}
+
+.date {
+  font-size: 12px;
+}
+
+form{
+  width: 250px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+input, textarea {
+  border: none;
+  border-bottom: 1px solid gray;
+}
+
+input::placeholder, textarea::placeholder{
+  font-size: 12;
+  color: rgb(176, 176, 176);
+}
+
+
+.submitButton{
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+  background-color: tomato;  
+  cursor: pointer;
+}
+
+.button{
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.logout{
+  background-color: tomato;
+}
+
+.login{
+  background-color: teal;
+  margin-right: 10px;
+}
+
+.register{
+  background-color: slateblue;
+}
+
+.buttons, .logout{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
