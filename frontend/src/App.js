@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
-import Map, { Marker, Popup } from "react-map-gl/maplibre";
-import "@maptiler/sdk/dist/maptiler-sdk.css";
-import RoomIcon from "@mui/icons-material/Room";
+import "./App.css"; // Import your CSS file
+import Map, { Marker, Popup } from "react-map-gl/maplibre"; // Import Map component
+import "@maptiler/sdk/dist/maptiler-sdk.css"; // Import MapTiler SDK CSS
+import RoomIcon from "@mui/icons-material/Room"; // Import icons
 import StarIcon from "@mui/icons-material/Star";
-import axios from "axios";
+import axios from "axios"; // Import Axios for making API requests
 import { format } from "timeago.js";
 import Register from "./components/Register";
-import Login from "./components/Login";
+import Login from "./components/login";
+import ListView from "./components/ListView";
 
 function App() {
-  const myStorage= window.localStorage; 
+  // Initialize localStorage
+  const myStorage = window.localStorage;
+
+  // State variables
   const [currentUser, setCurrentUser] = useState(myStorage.getItem("user"));
   const [pins, setPins] = useState([]);
   const [currentPlaceId, setCurrentPlaceId] = useState(null);
@@ -20,6 +24,7 @@ function App() {
   const [rating, setRating] = useState(0);
   const [showRegister, setShowRegister] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
+  const [showListView, setShowListView] = useState(false);
 
   const [viewState, setViewState] = useState({
     longitude: 72,
@@ -27,6 +32,7 @@ function App() {
     zoom: 7,
   });
 
+  // Fetch pins from the server on component mount
   useEffect(() => {
     const getPins = async () => {
       try {
@@ -39,19 +45,19 @@ function App() {
     getPins();
   }, []);
 
+  // Handle marker click to display popup and adjust view
   const handleMarkerClick = (id, lat, lng) => {
     setCurrentPlaceId(id);
 
-    console.log("Lat", lat, "Lan", lng);
-
+    // Set new viewState to focus on the marker
     setViewState({
       latitude: lat,
       longitude: lng,
       zoom: 5, // Adjust the zoom level as needed
     });
   };
-  console.log(viewState);
 
+  // Handle double click to add a new place
   const handleAddClick = (e) => {
     const lng = e.lngLat.lng;
     const lat = e.lngLat.lat;
@@ -61,6 +67,7 @@ function App() {
     });
   };
 
+  // Handle form submission to add a new pin
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newPin = {
@@ -74,26 +81,36 @@ function App() {
     try {
       const res = await axios.post("/pins", newPin);
 
+      // Add the new pin to the pins state
       setPins([...pins, res.data]);
-      console.log(pins);
       setNewPlace(null);
     } catch (err) {
       console.log(err);
     }
   };
-const handleLogout = () =>{
-  myStorage.removeItem("user");
-  setCurrentUser(null);
-}
+
+  // Handle logout by removing the user from localStorage
+  const handleLogout = () => {
+    myStorage.removeItem("user");
+    setCurrentUser(null);
+  };
+
+  const handleMapViewClick = () => {
+    setShowListView(false);
+    // Store the showListView state in localStorage
+    myStorage.setItem("showListView", "false");
+  };
+
+  const handleListViewClick = () => {
+    setShowListView(true); // Set it to true to show the list view
+    // Store the showListView state in localStorage
+    myStorage.setItem("showListView", "true");
+  };
 
   return (
     <div>
+      {/* Map */}
       <Map
-        // initialViewState={{
-        //   longitude: -122.4,
-        //   latitude: 37.8,
-        //   zoom: 14
-        // }}
         initialViewState={viewState}
         style={{ width: "100vw", height: "100vh" }}
         mapStyle={`https://api.maptiler.com/maps/streets/style.json?key=${process.env.REACT_APP_MAPTILER_API_KEY}`}
@@ -158,7 +175,7 @@ const handleLogout = () =>{
                 />
                 <label>Review</label>
                 <textarea
-                  placeholder="Say us somthing about this place."
+                  placeholder="Say something about this place."
                   onChange={(e) => setDesc(e.target.value)}
                 />
                 <label>Rating</label>
@@ -175,7 +192,11 @@ const handleLogout = () =>{
           </Popup>
         )}
         {currentUser ? (
-          <button className="button logout" onClick={handleLogout}>Log out</button>
+          <div className="dashboard-buttons">
+            <button className="button logout" onClick={handleLogout}>
+              Log out
+            </button>
+          </div>
         ) : (
           <div className="buttons">
             <button className="button login" onClick={() => setShowLogin(true)}>
@@ -189,10 +210,32 @@ const handleLogout = () =>{
             </button>
           </div>
         )}
-
         {showRegister && <Register setShowRegister={setShowRegister} />}
-        {showLogin && <Login setShowLogin={setShowLogin} myStorage={myStorage} setCurrentUser={setCurrentUser}/>}
+        {showLogin && (
+          <Login
+            setShowLogin={setShowLogin}
+            myStorage={myStorage}
+            setCurrentUser={setCurrentUser}
+          />
+        )}
+        {showListView && <ListView places={pins} showListView={showListView} />}
       </Map>
+
+      {/* Toggle View Buttons */}
+      <div className="toggle-view-buttons">
+        <button
+          className={`map-view-button ${showListView ? "" : "active"}`}
+          onClick={handleMapViewClick}
+        >
+          Map View
+        </button>
+        <button
+          className={`list-view-button ${showListView ? "active" : ""}`}
+          onClick={handleListViewClick}
+        >
+          List View
+        </button>
+      </div>
     </div>
   );
 }

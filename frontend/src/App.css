@@ -1,3 +1,4 @@
+/* Styles for Card */
 .card {
   width: 250px;
   height: 250px;
@@ -10,6 +11,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
 }
 
+/* Label Styles */
 label {
   color: tomato;
   font-size: 13px;
@@ -18,24 +20,29 @@ label {
   border-bottom: 1px solid tomato; /* Add a more visible border-bottom */
 }
 
+/* Description Styles */
 .desc {
   font-size: 14px;
 }
 
+/* Star Icon Styles */
 .star {
   color: gold;
   font-size: 16px; /* Increase font size for stars */
 }
 
+/* Username Styles */
 .username {
   font-size: 14px;
 }
 
+/* Date Styles */
 .date {
   font-size: 12px;
 }
 
-form{
+/* Form Styles */
+form {
   width: 250px;
   height: 250px;
   display: flex;
@@ -43,27 +50,32 @@ form{
   justify-content: space-between;
 }
 
-input, textarea {
+/* Input and Textarea Styles */
+input,
+textarea {
   border: none;
   border-bottom: 1px solid gray;
 }
 
-input::placeholder, textarea::placeholder{
-  font-size: 12;
+/* Input and Textarea Placeholder Styles */
+input::placeholder,
+textarea::placeholder {
+  font-size: 12px;
   color: rgb(176, 176, 176);
 }
 
-
-.submitButton{
+/* Submit Button Styles */
+.submitButton {
   border: none;
   padding: 5px;
   border-radius: 5px;
   color: white;
-  background-color: tomato;  
+  background-color: tomato;
   cursor: pointer;
 }
 
-.button{
+/* Button Styles */
+.button {
   border: none;
   padding: 5px;
   border-radius: 5px;
@@ -71,21 +83,80 @@ input::placeholder, textarea::placeholder{
   cursor: pointer;
 }
 
-.logout{
+/* Logout Button Styles */
+.logout {
   background-color: tomato;
 }
 
-.login{
+/* Login Button Styles */
+.login {
   background-color: teal;
   margin-right: 10px;
 }
 
-.register{
+/* Register Button Styles */
+.register {
   background-color: slateblue;
 }
 
-.buttons, .logout{
+/* Button Container Styles */
+.buttons,
+.logout {
   position: absolute;
   top: 10px;
   right: 10px;
 }
+
+/* Add this to your CSS */
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Hide scroll bars */
+  height: 100%;
+  width: 100%;
+}
+
+.map-container {
+  position: relative;
+}
+
+.toggle-view-buttons {
+  position: absolute;
+  top: 20px; /* Adjust the top position as needed */
+  left: 20px; /* Adjust the left position as needed */
+  z-index: 9999; /* Ensures the buttons are on top */
+}
+
+.map-view-button {
+  padding: 8px 16px; /* Smaller padding */
+  color: white;
+  background-color: #444444;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  margin-right: 10px;
+  transition: background-color 0.3s ease;
+  border-radius: 10px; /* Rounded edges */
+}
+
+.list-view-button {
+  padding: 8px 16px; /* Smaller padding */
+  color: white;
+  background-color: #444444;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  margin-right: 10px;
+  transition: background-color 0.3s ease;
+  border-radius: 10px; /* Rounded edges */
+}
+
+/* Style for the active button (if needed) */
+.map-view-button.active,
+.list-view-button.active {
+  background-color: #222;
+}
+
+
+
+

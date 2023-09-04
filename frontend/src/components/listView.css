@@ -1,0 +1,89 @@
+/* Styles for the list view container */
+.list-view-container {
+  position: fixed;
+  top: 50%; /* Vertically center the container */
+  left: 10px; /* Adjust the left position as needed */
+  transform: translateY(-50%); /* Vertically center the container */
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 20px;
+  max-height: 80vh; /* Set a maximum height with viewport units */
+  overflow-y: auto; /* Enable vertical scrolling if the content overflows */
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 9999; /* Set a higher z-index to render above the map */
+  scrollbar-width: thin; /* Thin scrollbar on supported browsers */
+  scrollbar-color: #ccc #f0f0f0; /* Scrollbar colors */
+}
+
+/* Styles for the content within the container */
+.list-view-content {
+  padding: 10px;
+  overflow-y: auto; /* Enable vertical scrolling for content */
+  max-height: calc(
+    100% - 60px
+  ); /* Subtract the header and input/select heights */
+}
+
+/* Header styles */
+.list-view-container h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+/* Input and select styles */
+.list-view-container input[type="text"],
+.list-view-container select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Table styles */
+.list-view-container table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Table header and data cell styles */
+.list-view-container th,
+.list-view-container td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+/* Table header styles */
+.list-view-container th {
+  background-color: #333;
+  color: #fff;
+}
+
+/* Alternating row styles */
+.list-view-container tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Scrollbar styles for WebKit (Chrome, Safari) */
+.list-view-container::-webkit-scrollbar {
+  width: 8px; /* Set the width of the scrollbar */
+}
+
+/* Scrollbar thumb styles for WebKit */
+.list-view-container::-webkit-scrollbar-thumb {
+  background-color: #ccc; /* Color of the thumb */
+  border-radius: 4px; /* Rounded corners for the thumb */
+}
+
+/* Scrollbar thumb hover styles for WebKit */
+.list-view-container::-webkit-scrollbar-thumb:hover {
+  background-color: #999; /* Color of the thumb on hover */
+}
+
+/* Scrollbar track styles for WebKit */
+.list-view-container::-webkit-scrollbar-track {
+  background-color: #f0f0f0; /* Color of the track */
+  border-radius: 4px; /* Rounded corners for the track */
+}
